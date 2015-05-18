@@ -1,0 +1,15 @@
+.form {
+  padding: 16px;
+}
+.form input.ng-invalid.ng-touched {
+  background-color: #FCE4EC;
+}
+.form input.ng-valid.ng-touched {
+  background-color: #b3e5fc;
+}
+.form__list {
+  padding-left: 0;
+}
+.form__list li {
+  list-style-type: none;
+}

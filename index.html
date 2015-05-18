@@ -1,76 +1,64 @@
 <!DOCTYPE html>
 
-<html ng-app>
+<html ng-app="formApp">
 
 <head>
   <title>form by angular</title>
+  <link rel="stylesheet" href="./build.css">
   <script src="bower_components/angular/angular.min.js"></script>
-  <style type="text/css">
-    .css-form input.ng-invalid.ng-touched {
-      background-color: #FA787E;
-    }
-
-    .css-form input.ng-valid.ng-touched {
-      background-color: #78FA89;
-    }
-  </style>
+  <script src="./build.js"></script>
 </head>
 
 <body>
-<div>
-<form name="form" class="css-form" novalidate>
-  <ul>
-    <li>
-      名前: <input type="text" ng-model="user.name" name="uName" required ng-minlength="1" ng-maxlength="8">
-      <div ng-show="form.$sumitted || form.uName.$touched">
-        <span ng-show="form.uName.$error.required">Tell us your name.</span>
-        <span ng-show="form.uName.$error.minlength">Too short.</span>
-        <span ng-show="form.uName.$error.maxlength">Too long.</span>
-      </div>
-    </li>
-    <li>
-      メールアドレス: <input type="email" ng-model="user.email" name="uEmail" required>
-      <div ng-show="form.$submitted || form.uEmail.$touched">
-        <span ng-show="form.uEmail.$error.required">Tell us your email.</span>
-        <span ng-show="form.uEmail.$error.email">This is not a valid email.</span>
-      </div>
-    </li>
-    <li>
-      UTL: <input type="url" ng-model="user.url" name="uUrl" required>
-      <div ng-show="form.$submitted || form.uUrl.$touched">
-        <span ng-show="form.uUrl.$error.required">Tell us your url.</span>
-        <span ng-show="form.uUrl.$error.url">This is not a valid url.</span>
-      </div>
-    </li>
-    <li>
-      電話番号: <input type="tel" ng-model="user.tel" name="uTel" required>
-      <div ng-show="form.$submitted || form.uUrl.$touched">
-        <span ng-show="form.uTel.$error.required">Tell us your tel.</span>
-        <span ng-show="form.uTel.$error.url">This is not a valid tel.</span>
-      </div>
-    </li>
-    <li>
-      問い合わせ: <textarea name="uMemo" ng-model="user.memo" ng-maxlength="140"></textarea>{{140 - user.memo.length}}
-      <div ng-show="form.$submitted || form.uMemo.$touched">
-        <span ng-show="form.uMemo.$error.maxlength">Too long.</span>
-      </div>
-    </li>
-    <li>
-      18+ <input type="checkbox" ng-model="user.adult">
-      <!--18+ <input type="checkbox" ng-model="user.adult" ng-true-value="adult" ng-false-value="child">-->
-    </li>
-    <li>
-      tel-type <input type="radio" ng-model="user.phone" value="iphone"> iphone
-      <input type="radio" ng-model="user.phone" value="android"> android
-      <!--18+ <input type="checkbox" ng-model="user.adult" ng-true-value="adult" ng-false-value="child">-->
-    </li>
-    <li><input type="submit" value="send">
-  </ul>
-</form>
-</div>
+  <form name="form" class="form" novalidate ng-controller="FormController">
+    <ul class="form__list">
+      <li>
+        <input type="text" name="uName" placeholder="名前（必須）" ng-model="user.name" required ng-minlength="1" ng-maxlength="8">
+        <div ng-show="form.$submitted || form.uName.$touched">
+          <span ng-show="form.uName.$error.required">名前を入力してください。</span>
+          <span ng-show="form.uName.$error.minlength">Too short.</span>
+          <span ng-show="form.uName.$error.maxlength">Too long.</span>
+        </div>
+      </li>
+      <li>
+        <input type="email" name="uEmail" placeholder="メールアドレス（必須）" ng-model="user.email" required style="ime-mode: disabled;">
+        <div ng-show="form.$submitted || form.uEmail.$touched">
+          <span ng-show="form.uEmail.$error.required">メールアドレスを入力してください。</span>
+          <span ng-show="form.uEmail.$error.email">正しくメールアドレスを入力してください。</span>
+        </div>
+      </li>
+      <li>
+        <input type="url" name="uUrl" placeholder="URL（任意）" ng-model="user.url" style="ime-mode: disabled;">
+        <div ng-show="form.$submitted || form.uUrl.$touched">
+          <span ng-show="form.uUrl.$error.url">正しくURLを入力してください。</span>
+        </div>
+      </li>
+      <li>
+        <input type="tel" name="uTel" placeholder="電話番号（任意）" ng-model="user.tel" ng-pattern="/^[\-0-9]/" style="ime-mode: disabled;">
+        <div ng-show="form.$submitted || form.uUrl.$touched">
+          <span ng-show="form.uTel.$error.pattern">正しく電話番号を入力してください。</span>
+        </div>
+      </li>
+      <li>
+        <textarea name="uMemo" placeholder="お問い合わせ内容（任意）" ng-model="user.memo" ng-maxlength="140"></textarea>{{140 - user.memo.length}}
+        <div ng-show="form.$submitted || form.uMemo.$touched">
+          <span ng-show="form.uMemo.$error.maxlength">140字以内で入力してください。</span>
+        </div>
+      </li>
+      <li>
+        18+ <input type="checkbox" ng-model="user.adult">
+        <!--18+ <input type="checkbox" ng-model="user.adult" ng-true-value="adult" ng-false-value="child">-->
+      </li>
+      <li>
+        tel-type <input type="radio" ng-model="user.phone" value="iphone"> iphone
+        <input type="radio" ng-model="user.phone" value="android"> android
+        <!--18+ <input type="checkbox" ng-model="user.adult" ng-true-value="adult" ng-false-value="child">-->
+      </li>
+      <li><input type="submit" ng-click="send(user)" value="送信する">
+    </ul>
+  </form>
 
-<pre>{{user|json}}</pre>
-
+  <pre>{{user|json}}</pre>
 
 </body>
 
