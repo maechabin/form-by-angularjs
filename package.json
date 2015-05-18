@@ -1,11 +1,11 @@
 {
-  "name": "angularform",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "Inquiry form by AngularJS",
+  "version": "0.0.2",
+  "description": "Inquiry form by AngularJS",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "maechabin http://mae.chab.in mail@chab.in",
+  "license": "MIT license"
 }

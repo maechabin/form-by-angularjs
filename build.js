@@ -1,41 +1,27 @@
 var angular = angular || {};
+var formApp = angular.module("formApp", []);
 
-angular.module("formApp", [])
- .controller("FormController", ["$scope", function ($scope) {
+formApp.controller("FormController", ["$scope", "$http", function ($scope, $http) {
 
-   "use strict";
+  "use strict";
 
-   $scope.master = {};
+  $scope.master = {};
 
-   $scope.send = function (user) {
+  $scope.send = function (user) {
 
-     this.master = angular.copy(user);
-     console.dir(this.master);
-     this.ajax().done(function (d) {
-       alert(d);
-     });
+    this.master = angular.copy(user);
 
-     return false;
-
-   };
-
-   $scope.ajax = function () {
-
-     var d = new $.Deferred();
-
-     $.ajax({
-
-       type: "POST",
-       url: "./php/index.php",
-       data: this.master,
-       processData: false,
-       contentType: false,
-       success: d.resolve,
-       error: d.reject
-
-     });
-
-     return d.promise();
+    $http({
+      method: "POST",
+        url: "http://example.com/wp-admin/admin-ajax.php",
+        params: this.master
+      })
+      .success(function (data, status, headers, config) {
+        $scope.message = data.title; // 適宜変更する
+      })
+      .error(function (data, status, headers, config) {
+        $scope.message = "failed";
+      });
 
    };
 
