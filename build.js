@@ -13,16 +13,16 @@ formApp.controller("FormController", ["$scope", "$http", function ($scope, $http
 
     $http({
       method: "POST",
-        url: "http://example.com/wp-admin/admin-ajax.php",
+        url: "./index.php",
         params: this.master
       })
       .success(function (data, status, headers, config) {
-        $scope.message = data.title; // 適宜変更する
+        $scope.message = "success";
       })
       .error(function (data, status, headers, config) {
         $scope.message = "failed";
       });
 
-   };
+  };
 
- }]);
+}]);
