@@ -1,22 +1,22 @@
 <?php
 class Sendmail {
 
-  const TO = "sample@example.com";
   const SUBJECT = "お問い合わせ受付";
-  const HEADER = "from: sample@example.com";
+  const HEADER = "from: sample@example.com bcc: sample@example.com";
 
   private $data;
   private $message;
+  private $to = "sample@example.com";
 
   private function get_data() {
 
     $date = date("Y/n/j H:i:s");
-    $company = (isset($_POST["company"]) && $_POST["company"] != "") ? $_POST["company"] : "---";
-    $person = (isset($_POST["person"]) && $_POST["person"] != "") ? $_POST["person"] : "---";
-    $tel = (isset($_POST["tel"]) && $_POST["tel"] != "") ? $_POST["tel"] : "---";
-    $email = (isset($_POST["email"]) && $_POST["email"] != "") ? $_POST["email"] : "---";
-    $address = (isset($_POST["address"]) && $_POST["address"] != "") ? $_POST["address"] : "---";
-    $inquiry = (isset($_POST["inquiry"]) && $_POST["inquiry"] != "") ? $_POST["inquiry"] : "---";
+    $company = (isset($_GET["company"]) && $_GET["company"] != "") ? $_GET["company"] : "---";
+    $person = (isset($_GET["person"]) && $_GET["person"] != "") ? $_GET["person"] : "---";
+    $tel = (isset($_GET["tel"]) && $_GET["tel"] != "") ? $_GET["tel"] : "---";
+    $email = (isset($_GET["email"]) && $_GET["email"] != "") ? $_GET["email"] : "---";
+    $address = (isset($_GET["address"]) && $_GET["address"] != "") ? $_GET["address"] : "---";
+    $inquiry = (isset($_GET["inquiry"]) && $_GET["inquiry"] != "") ? $_GET["inquiry"] : "---";
 
     $this->data = array($date, $company, $person, $tel, $email, $address, $inquiry);
 
@@ -52,7 +52,7 @@ class Sendmail {
     mb_language("japanese");
     mb_internal_encoding("utf-8");
     mb_send_mail(
-      self::TO,
+      $this->to,
       self::SUBJECT,
       $this->message,
       self::HEADER
