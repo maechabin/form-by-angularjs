@@ -11,21 +11,20 @@ class Sendmail {
   private function get_data() {
 
     $date = date("Y/n/j H:i:s");
-    $company = (isset($_GET["company"]) && $_GET["company"] != "") ? $_GET["company"] : "---";
-    $person = (isset($_GET["person"]) && $_GET["person"] != "") ? $_GET["person"] : "---";
-    $tel = (isset($_GET["tel"]) && $_GET["tel"] != "") ? $_GET["tel"] : "---";
-    $email = (isset($_GET["email"]) && $_GET["email"] != "") ? $_GET["email"] : "---";
-    $address = (isset($_GET["address"]) && $_GET["address"] != "") ? $_GET["address"] : "---";
-    $inquiry = (isset($_GET["inquiry"]) && $_GET["inquiry"] != "") ? $_GET["inquiry"] : "---";
+    $name = (isset($_GET["uName"]) && $_GET["uName"] != "") ? $_GET["uName"] : "---";
+    $email = (isset($_GET["uEmail"]) && $_GET["uEmail"] != "") ? $_GET["uEmail"] : "---";
+    $url = (isset($_GET["uUrl"]) && $_GET["uUrl"] != "") ? $_GET["uUrl"] : "---";
+    $tel = (isset($_GET["uTel"]) && $_GET["uTel"] != "") ? $_GET["uTel"] : "---";
+    $memo = (isset($_GET["uMemo"]) && $_GET["uMemo"] != "") ? $_GET["uMemo"] : "---";
 
-    $this->data = array($date, $company, $person, $tel, $email, $address, $inquiry);
+    $this->data = array($date, $name, $email, $url, $tel, $memo);
 
   }
 
   private function create_message() {
 
     $this->message .= "\n"
-      . $this->data[1] . " " .$this->data[2] . " 様\n"
+      . $this->data[1] . " 様\n"
       . "\n"
       . "お問い合わせくださり誠にありがとうございます。\n"
       . "\n"
@@ -34,12 +33,11 @@ class Sendmail {
       . "----- 【ご記入内容】 -----\n"
       . "受付番号: " . "\n"
       . "\n"
-      . "会社名: " . $this->data[1] . "\n"
-      . "担当者名: " . $this->data[2] . "\n"
-      . "電話番号: " . $this->data[3] . "\n"
-      . "メールアドレス: " . $this->data[4] . "\n"
-      . "住所: " . $this->data[5] . "\n"
-      . "お問い合わせ内容: " . $this->data[6] . "\n"
+      . "名前: " . $this->data[1] . "\n"
+      . "メールアドレス: " . $this->data[2] . "\n"
+      . "URL: " . $this->data[3] . "\n"
+      . "電話番号: " . $this->data[4] . "\n"
+      . "お問い合わせ内容: " . $this->data[5] . "\n"
       . "\n";
   }
 
