@@ -37,15 +37,37 @@
 .form__list_clear {
   clear: both;
 }
+.form__list_relative {
+  position: relative;
+}
+.form__list_count {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  color: #2196F3;
+}
 .form__message_error {
   color: #BF360C;
 }
 .form__button {
+  margin: 16px auto;
+  padding: 8px 0;
+  font-size: 18px;
+  width: 300px;
+  display: block;
+  border: 4px solid #2196F3;
+  color: #2196F3;
+  background-color: #fff;
+  border-radius: 40px;
   cursor: pointer;
 }
 .form__button:hover {
-
+  color: #fff;
+  background-color: #2196F3;
 }
 .form__button:disabled {
   cursor: default;
+  color: #fff;
+  background-color: #2196F3;
+  opacity: .3;
 }

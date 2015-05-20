@@ -37,8 +37,9 @@
           <span ng-show="form.uTel.$error.minlength || form.uTel.$error.maxlenth || form.uTel.$error.pattern">正しく電話番号を入力してください。</span>
         </div>
       </li>
-      <li class="form__list_clear">
-        <textarea name="uMemo" placeholder="お問い合わせ内容（任意）" ng-model="user.memo" ng-maxlength="140" rows="6"></textarea>{{140 - user.memo.length}}
+      <li class="form__list_clear form__list_relative">
+        <textarea name="uMemo" placeholder="お問い合わせ内容（任意 / 140文字以内）" ng-model="user.memo" ng-maxlength="140" rows="6"></textarea>
+        <span class="form__list_count">{{140 - user.memo.length}}</span>
         <div ng-show="form.$submitted || form.uMemo.$touched" class="form__message_error">
           <span ng-show="form.uMemo.$error.maxlength">140字以内で入力してください。</span>
         </div>
@@ -52,7 +53,7 @@
         <input type="radio" ng-model="user.phone" value="android"> android
       </li>
 -->
-      <li><input type="submit" ng-click="submit(user)" value="送信する" ng-disabled="!form.$valid" class="form__button">
+      <li><button type="submit" ng-click="submit(user)" ng-disabled="!form.$valid" class="form__button">送信する</button></li>
     </ul>
   </form>
 
