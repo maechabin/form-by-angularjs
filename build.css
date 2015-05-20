@@ -1,19 +1,23 @@
 .form {
   font-family: メイリオ,Meiryo,'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',Osaka,'ＭＳ Ｐゴシック';
-  padding: 16px;
+  margin: 16px;
+  width: 656px;
 }
 .form input,
 .form textarea {
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid #CFD8DC;
   padding: 8px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 .form input {
-  width: 300px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 4px;
 }
 .form textarea {
-  width: 600px;
+  box-sizing: border-box;
+  width: 100%;
 }
 .form .ng-invalid.ng-touched {
   background-color: #FCE4EC;
@@ -22,7 +26,16 @@
   padding-left: 0;
 }
 .form__list li {
+  box-sizing: border-box;
+  padding: 0 2px;
   list-style-type: none;
+}
+.form__list_half {
+  float: left;
+  width: 50%;
+}
+.form__list_clear {
+  clear: both;
 }
 .form__message_error {
   color: #BF360C;
