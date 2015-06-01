@@ -2,11 +2,12 @@
 class Sendmail {
 
   const SUBJECT = "お問い合わせ受付";
-  const HEADER = "from: sample@example.com bcc: sample@example.com";
+  const HEADER = "from: sample@example.com\nbcc: sample@example.com";
 
   private $data;
   private $message;
   private $to = "sample@example.com";
+  private $count;
 
   private function get_data() {
 
@@ -17,7 +18,9 @@ class Sendmail {
     $tel = (isset($_GET["uTel"]) && $_GET["uTel"] != "") ? $_GET["uTel"] : "---";
     $memo = (isset($_GET["uMemo"]) && $_GET["uMemo"] != "") ? $_GET["uMemo"] : "---";
 
-    $this->data = array($date, $name, $email, $url, $tel, $memo);
+    $this->write_file();
+    $this->data = array($date, $name, $email, $url, $tel, $memo, $this->count);
+    $this->to = $email;
 
   }
 
@@ -31,7 +34,7 @@ class Sendmail {
       . "下記の内容で受け付けいたしました。\n"
       . "\n"
       . "----- 【ご記入内容】 -----\n"
-      . "受付番号: " . "\n"
+      . "受付番号: " . $this->data[6] . "\n"
       . "\n"
       . "名前: " . $this->data[1] . "\n"
       . "メールアドレス: " . $this->data[2] . "\n"
@@ -39,9 +42,18 @@ class Sendmail {
       . "電話番号: " . $this->data[4] . "\n"
       . "お問い合わせ内容: " . $this->data[5] . "\n"
       . "\n";
+
   }
 
   private function write_file() {
+
+    $this->count = file_get_contents("count.txt");
+    $fp = fopen("count.txt", "w+");
+
+    if ($fp) {
+      fwrite($fp, $this->count + 1);
+      fclose($fp);
+    }
 
   }
 
@@ -59,10 +71,12 @@ class Sendmail {
   }
 
   public function init() {
+
     $this->get_data();
     $this->create_message();
     $this->send_mail();
     echo $this->message;
+
   }
 
 }
