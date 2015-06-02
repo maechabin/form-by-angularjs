@@ -1,7 +1,7 @@
 var angular = angular || {};
 var formApp = angular.module("formApp", []);
 
-formApp.controller("FormController", ["$scope", "$http", function ($scope, $http) {
+formApp.controller("FormController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
 
   "use strict";
 
@@ -9,25 +9,28 @@ formApp.controller("FormController", ["$scope", "$http", function ($scope, $http
 
   $scope.submit = function (user) {
 
-    this.master = angular.copy(user);
-    //console.log(this.master);
+    var that = this;
+    that.master = angular.copy(user);
+    //console.log(that.master);
 
     $http({
       method: "GET",
         url: "./index.php",
-        params: this.master
+        params: that.master
       })
       .success(function (data, status, headers, config) {
-        this.message = "success";
-        location.hash = "#" + this.message;
-        //console.log($scope.message);
+        that.message = "success";
+        $location.hash(that.message);
+        //location.hash = "#" + that.message;
+        //console.log(that.message);
         //console.dir(arguments);
         angular.element(".form__list").html("お問い合わせを受け付けました。<br>ありがとうございます。");
       })
       .error(function (data, status, headers, config) {
-        this.message = "failed";
-        location.hash = "#" + this.message;
-        //console.log($scope.message);
+        that.message = "failed";
+        $location.hash(that.message);
+        //location.hash = "#" + that.message;
+        //console.log(that.message);
         //console.dir(arguments);
         angular.element(".form__list").html("お問い合わせの送信に失敗しました。<br>時間をおいてから再度お試しください。");
       });
