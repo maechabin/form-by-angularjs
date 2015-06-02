@@ -18,15 +18,15 @@ formApp.controller("FormController", ["$scope", "$http", function ($scope, $http
         params: this.master
       })
       .success(function (data, status, headers, config) {
-        $scope.message = "success";
-        location.hash = "#" + $scope.message;
+        this.message = "success";
+        location.hash = "#" + this.message;
         //console.log($scope.message);
         //console.dir(arguments);
         angular.element(".form__list").html("お問い合わせを受け付けました。<br>ありがとうございます。");
       })
       .error(function (data, status, headers, config) {
-        $scope.message = "failed";
-        location.hash = "#" + $scope.message;
+        this.message = "failed";
+        location.hash = "#" + this.message;
         //console.log($scope.message);
         //console.dir(arguments);
         angular.element(".form__list").html("お問い合わせの送信に失敗しました。<br>時間をおいてから再度お試しください。");
