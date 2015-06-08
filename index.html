@@ -3,6 +3,7 @@
 <html ng-app="formApp">
 
 <head>
+  <meta charset="utf-8">
   <title>form by angular</title>
   <link rel="stylesheet" href="./build.css">
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -45,16 +46,20 @@
           <span ng-show="form.uMemo.$error.maxlength">140字以内で入力してください。</span>
         </div>
       </li>
+      <li>
+        <span class="form__list_title">デバイス（必須）:</span>
+        <label><input type="radio" name="uDev" ng-model="user.device" value="pc" required> PC</label>
+        <label><input type="radio" name="uDev" ng-model="user.device" value="sp" required> スマートフォン</label>
+        <label><input type="radio" name="uDev" ng-model="user.device" value="tablet" required> タブレット</label>
+      </li>
 <!--
       <li>
         18+ <input type="checkbox" ng-model="user.adult">
       </li>
-      <li>
-        tel-type <input type="radio" ng-model="user.phone" value="iphone"> iphone
-        <input type="radio" ng-model="user.phone" value="android"> android
-      </li>
--->
-      <li><button type="submit" ng-click="submit(user)" ng-disabled="!form.$valid" class="form__button">送信する</button></li>
+    -->
+
+
+      <li><button ng-click="submit(user)" ng-disabled="!form.$valid" class="form__button">送信する</button></li>
     </ul>
   </form>
 

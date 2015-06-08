@@ -17,9 +17,10 @@ class Sendmail {
     $url = (isset($_GET["uUrl"]) && $_GET["uUrl"] != "") ? $_GET["uUrl"] : "---";
     $tel = (isset($_GET["uTel"]) && $_GET["uTel"] != "") ? $_GET["uTel"] : "---";
     $memo = (isset($_GET["uMemo"]) && $_GET["uMemo"] != "") ? $_GET["uMemo"] : "---";
+    $device = (isset($_GET["uDev"]) && $_GET["uDev"] != "") ? $_GET["uDev"] : "---";
 
     $this->write_file();
-    $this->data = array($date, $name, $email, $url, $tel, $memo, $this->count);
+    $this->data = array($date, $name, $email, $url, $tel, $memo, $device, $this->count);
     $this->to = $email;
 
   }
@@ -34,13 +35,14 @@ class Sendmail {
       . "下記の内容で受け付けいたしました。\n"
       . "\n"
       . "----- 【ご記入内容】 -----\n"
-      . "受付番号: " . $this->data[6] . "\n"
+      . "受付番号: " . $this->data[7] . "\n"
       . "\n"
       . "名前: " . $this->data[1] . "\n"
       . "メールアドレス: " . $this->data[2] . "\n"
       . "URL: " . $this->data[3] . "\n"
       . "電話番号: " . $this->data[4] . "\n"
       . "お問い合わせ内容: " . $this->data[5] . "\n"
+      . "デバイス: " . $this->data[6] . "\n"
       . "\n";
 
   }

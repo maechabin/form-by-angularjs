@@ -3,14 +3,20 @@
   margin: 16px;
   width: 656px;
 }
-.form input,
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="url"],
+.form input[type="tel"],
 .form textarea {
   font-size: 14px;
   border: 1px solid #CFD8DC;
   padding: 8px;
   border-radius: 3px;
 }
-.form input {
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="url"],
+.form input[type="tel"] {
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 4px;
@@ -18,6 +24,16 @@
 .form textarea {
   box-sizing: border-box;
   width: 100%;
+}
+.form input[type="radio"] {
+  cursor: pointer;
+  vertical-align: 2px;
+}
+.form label {
+  color: #212121;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 16px;
 }
 .form .ng-invalid.ng-touched {
   background-color: #FCE4EC;
@@ -45,6 +61,9 @@
   right: 16px;
   bottom: 12px;
   color: #2196F3;
+}
+.form__list_title {
+  font-size: 14px;
 }
 .form__message_error {
   color: #BF360C;
