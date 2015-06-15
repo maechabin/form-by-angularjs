@@ -1,9 +1,20 @@
 var angular = angular || {};
 var formApp = angular.module("formApp", []);
 
+formApp.config(function ($locationProvider) {
+  "use strict";
+  $locationProvider.html5Mode(true);
+});
+
 formApp.controller("FormController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
 
   "use strict";
+
+  //console.dir($location.search());
+
+  $scope.user = {
+    name: $location.search().name
+  };
 
   $scope.master = {};
 
