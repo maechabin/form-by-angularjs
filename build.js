@@ -6,19 +6,19 @@ formApp.config(function ($locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
-formApp.controller("FormController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+formApp.controller("FormController", ["$http", "$location", function ($http, $location) {
 
   "use strict";
 
   //console.dir($location.search());
 
-  $scope.user = {
+  this.user = {
     name: $location.search().name
   };
 
-  $scope.master = {};
+  this.master = {};
 
-  $scope.submit = function (user) {
+  this.submit = function (user) {
 
     var that = this;
     that.master = angular.copy(user);
