@@ -6,7 +6,7 @@ formApp.config(function ($locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
-formApp.controller("FormController", ["$http", "$location", function ($http, $location) {
+formApp.controller("FormController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
 
   "use strict";
 
@@ -18,30 +18,30 @@ formApp.controller("FormController", ["$http", "$location", function ($http, $lo
 
   this.master = {};
 
-  this.submit = function (user) {
+  $scope.submit = function (user) {
 
-    var that = this;
-    that.master = angular.copy(user);
-    //console.log(that.master);
+    var self = this;
+    self.master = angular.copy(user);
+    //console.log(self.master);
 
     $http({
       method: "GET",
         url: "./index.php",
-        params: that.master
+        params: self.master
       })
       .success(function (data, status, headers, config) {
-        that.message = "success";
-        $location.hash(that.message);
+        self.message = "success";
+        $location.hash(self.message);
         //location.hash = "#" + that.message;
-        //console.log(that.message);
+        //console.log(self.message);
         //console.dir(arguments);
         angular.element(".form__list").html("お問い合わせを受け付けました。<br>ありがとうございます。");
       })
       .error(function (data, status, headers, config) {
-        that.message = "failed";
-        $location.hash(that.message);
+        self.message = "failed";
+        $location.hash(self.message);
         //location.hash = "#" + that.message;
-        //console.log(that.message);
+        //console.log(self.message);
         //console.dir(arguments);
         angular.element(".form__list").html("お問い合わせの送信に失敗しました。<br>時間をおいてから再度お試しください。");
       });
